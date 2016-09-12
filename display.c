@@ -54,7 +54,7 @@ void			display(t_map *map)
 
 	ft_buf(buffer, 100000, 1);
 	i = 0;
-	while (1)
+	while (i < 100)
 	{
 		paths = map->paths;
 		isfirst = true;

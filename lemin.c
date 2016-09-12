@@ -74,11 +74,13 @@ void		display_rooms(t_room *rooms, int roomcount)
 	}
 }
 
-void		display_paths(t_path *paths)
+void		display_paths(t_map *map)
 {
 	int		i;
 	int		j;
+	t_path	*paths;
 
+	paths = map->paths;
 	i = 0;
 	while (paths)
 	{
@@ -86,14 +88,16 @@ void		display_paths(t_path *paths)
 		printf("		wait: %i\n", paths->wait);;
 		printf("		turns: %i\n", paths->len);;
 		printf("		length: %f\n", paths->dist);;
-		printf("		indices:");
+		printf("		steps:");
 		j = 0;
 		while (j < paths->len)
 		{
-			printf(" %i", paths->steps[j]);
+			printf(" %s", get_room(map->rooms, paths->steps[j])->name);
 			j++;
 		}
+		printf("\n");
 		i++;
+		paths = paths->next;
 	}
 }
 
@@ -123,7 +127,7 @@ void		display_map(t_map *map, int pos)
 		printf("\n");
 	}
 	display_rooms(map->rooms, map->roomcount);
-	display_paths(map->paths);
+	display_paths(map);
 	printf("---------\n");
 }
 
