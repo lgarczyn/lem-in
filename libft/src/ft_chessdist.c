@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getchar.c                                       :+:      :+:    :+:   */
+/*   ft_chessdist.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarczyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/03 17:20:35 by lgarczyn          #+#    #+#             */
-/*   Updated: 2016/09/03 17:20:36 by lgarczyn         ###   ########.fr       */
+/*   Created: 2016/09/12 15:01:37 by lgarczyn          #+#    #+#             */
+/*   Updated: 2016/09/12 15:01:38 by lgarczyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_uint		ft_getchar(void)
+float	ft_chessdist(t_p a, t_p b)
 {
-	return (ft_getchar_int(false));
+	a.x -= b.x;
+	a.y -= b.y;
+	return (MAX(ABS(a.x), ABS(a.y)));
 }

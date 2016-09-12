@@ -14,7 +14,8 @@
 
 t_bool			ft_readint(int *target)
 {
-	char	c;
+	t_uint	c;
+	int		check;
 
 	c = ft_getchar();
 	if (c < '0' || c > '9')
@@ -23,7 +24,13 @@ t_bool			ft_readint(int *target)
 	ft_readchar();
 	while (ft_getchar() >= '0' && ft_getchar() <= '9')
 	{
-		*target = *target * 10 + ft_getchar() - '0';
+		check = *target * 10;
+		if (check / 10 != *target)
+		{
+			*target = INT_MAX;
+			return (true);
+		}
+		*target = check + ft_getchar() - '0';
 		ft_readchar();
 	}
 	return (true);

@@ -13,15 +13,13 @@
 #include "libft.h"
 #include <stdlib.h>
 
-void			*ft_realloc(void *ptr, size_t size)
+void			*ft_realloc(void *ptr, size_t size, size_t newsize)
 {
 	void		*mem;
 
-	if (!ptr && size)
-		return (ft_memalloc(size));
 	if (!ptr)
-		return (ft_memalloc(1));
-	mem = ft_memalloc(size);
+		return (ft_memalloc(newsize));
+	mem = ft_memalloc(newsize);
 	ft_memmove(mem, ptr, size);
 	free(ptr);
 	return (mem);

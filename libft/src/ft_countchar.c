@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getchar.c                                       :+:      :+:    :+:   */
+/*   ft_countchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarczyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/03 17:20:35 by lgarczyn          #+#    #+#             */
-/*   Updated: 2016/09/03 17:20:36 by lgarczyn         ###   ########.fr       */
+/*   Created: 2016/09/12 14:33:59 by lgarczyn          #+#    #+#             */
+/*   Updated: 2016/09/12 14:35:43 by lgarczyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-t_uint		ft_getchar(void)
+int				ft_countchar(char *str, char c)
 {
-	return (ft_getchar_int(false));
+	int			count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == c)
+			count++;
+		str++;
+	}
+	return (count);
 }

@@ -20,7 +20,15 @@ LFLAGS = -O3
 
 CC = gcc
 
-SRC = ft_atoi.c \
+SRC = ft_perror.c \
+	  ft_salloc.c \
+	  ft_secalloc.c \
+	  \
+	  ft_dist.c \
+	  ft_chessdist.c \
+	  ft_mandist.c \
+	  \
+	  ft_atoi.c \
 	  ft_bzero.c \
 	  ft_intlen.c \
 	  ft_isalnum.c \
@@ -30,6 +38,7 @@ SRC = ft_atoi.c \
 	  ft_isempty.c \
 	  ft_isprint.c \
 	  ft_isspace.c \
+	  ft_countchar.c \
 	  ft_itoa.c \
 	  ft_lstadd.c \
 	  ft_lstdel.c \
@@ -108,13 +117,13 @@ SRC = ft_atoi.c \
 	  ft_putrstr_buf.c \
 	  ft_reset_buf.c \
 	  ft_setfd_buf.c \
-	  ft_perror.c \
 	  \
 	  ft_getchar.c \
 	  ft_getchar_int.c \
 	  ft_readchar.c \
 	  ft_readint.c \
-	  ft_readtochar.c \
+	  ft_skiptochar.c \
+	  ft_readtochar.c
 
 RM = rm -f
 
@@ -129,6 +138,7 @@ all: $(NAME)
 	$(CC) $(LFLAGS) -o $@ -c $< $(FLAGS) $(OPT) -I $(INCLUDES)
 
 $(NAME) : $(OBJ)
+	echo obj
 	ar rc $(NAME) $(OBJ)
 	ranlib $(NAME)
 

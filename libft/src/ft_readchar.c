@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char			ft_readchar(void)
+t_uint		ft_readchar(void)
 {
 	return (ft_getchar_int(true));
 }

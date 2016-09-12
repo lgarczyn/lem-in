@@ -14,19 +14,21 @@
 #include "libft.h"
 #define READ_BUFFER 1024
 
-char			ft_getchar_int(t_bool move)
+t_uint				ft_getchar_int(t_bool move)
 {
-	static char	buffer[READ_BUFFER];
-	static int	pos;
-	static int	len;
-	char		c;
+	static t_byte	buffer[READ_BUFFER];
+	static int		pos;
+	static int		len;
+	t_byte			c;
 
 	if (pos >= len)
 	{
 		pos = 0;
 		len = read(0, buffer, READ_BUFFER);
-		if (len <= 0)
-			return ('\0');
+		if (len == 0)
+			return (READ_EOF);
+		if (len < 0)
+			return (READ_ERROR);
 	}
 	c = buffer[pos];
 	if (move)

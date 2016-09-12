@@ -11,51 +11,100 @@
 /* ************************************************************************** */
 
 #ifndef _LEMIN_H
-# define _LEMIN_H_H
+# define _LEMIN_H
 
-typedef struct		s_p
-{
-	int				x;
-	int				y;
-}					t_p;
+#include "libft.h"
+
+//!!!
+#include <stdio.h>
 
 typedef enum		e_type
 {
-	room = 0,
-	start = 1,
-	end = 2,
-};
+	t_none = 0,
+	t_start = 1,
+	t_end = 2,
+}					t_type;
+
+typedef enum		e_state
+{
+	s_clean = 0,
+	s_explored = 1,
+	s_burned = 2,
+}					t_state;
 
 typedef enum		e_error
 {
-	success = 0,
-	parsing = 1,
-	allocation = 2,
-};
+	e_success = 0,
+	e_logic = 1,
+	e_parsing = 2,
+	e_allocation = 3,
+}					t_error;
+
+//check the situation where start -> end
+
+typedef struct		s_name
+{
+	char			*name;
+	struct s_name	*next;
+}					t_name;
+
+typedef struct		s_link
+{
+	int				a;
+	int				b;
+	struct s_link	*next;
+}					t_link;
+
+typedef struct		s_exploration
+{
+	t_state			state;
+	int				len;
+	int				id;
+	float			dist;
+}					t_exploration;
 
 typedef struct		s_room
 {
+	int				id;
 	t_p				pos;
-	t_type			type;
-	int				count;
-	struct s_room	*next;
 	char			*name;
+	t_type			type;
+	t_state			state;
+	t_exploration	explo;
+	int				linkcount;
+	int				*links;
+	struct s_room	*next;
 }					t_room;
 
 typedef struct		s_path
 {
-	t_room			*a;
-	t_room			*b;
-	float			len;
+	int				antid;
+	int				wait;
+	int				len;
+	int				*steps;
+	float			dist;
 	struct s_path	*next;
 }					t_path;
 
 typedef struct		s_map
 {
+	int				antcount;
+	int				roomcount;
 	t_room			*rooms;
-	t_path			*paths;	
-};
+	t_link			*links;
+	int				start;
+	int				end;
+	t_path			*paths;
+}					t_map;
 
-t_room				*find_room(t_room *rooms, char *name);
-t_error				parse_map(t_map *map);
+t_room				*get_room();
+t_map				get_map();
+t_error				parse(t_map *map);
+t_error				check(t_map *map, t_bool *ignore);
+t_error				apply_links(t_map *map);
+t_error				find_paths(t_map *map);
+t_error				solve(t_map *map);
+void				display_instant(t_map *map);
+void				display(t_map *map);
+
 #endif

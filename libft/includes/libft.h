@@ -16,6 +16,7 @@
 # include <string.h>
 # include <errno.h>
 # include <stdlib.h>
+# include <limits.h>
 
 # define MIN(a,b)			(((a)<(b))?(a):(b))
 # define MAX(a,b)			(((a)>(b))?(a):(b))
@@ -27,6 +28,15 @@
 # define STDIN				0
 # define STDOUT				1
 # define STDERR				2
+
+typedef unsigned char		t_byte;
+typedef unsigned int		t_uint;
+
+# define READ_ERROR			(1 << CHAR_BIT)
+# define READ_EOF			(2 << CHAR_BIT)
+# define R_ERROR(x)			(x & READ_ERROR)
+# define R_EOF(x)			(x & READ_EOF)
+# define R_END(x)			(x & (READ_ERROR | READ_EOF))
 
 # include "tcolors.h"
 
@@ -52,7 +62,19 @@ typedef enum		e_bool
 	true = 1,
 }					t_bool;
 
+typedef struct		s_p
+{
+	int				x;
+	int				y;
+}					t_p;
+
 void				ft_perror(const char *str);
+void				*ft_salloc(size_t len);
+void				*ft_secalloc(size_t len);
+
+float				ft_dist(t_p a, t_p b);
+float				ft_chessdist(t_p a, t_p b);
+float				ft_mandist(t_p a, t_p b);
 
 t_buffer			*ft_buf(char *buffer, size_t size, int fd);
 t_buffer			*ft_get_buf(void);
@@ -73,10 +95,11 @@ void				ft_putrstr_buf(char *str);
 void				ft_reset_buf(int fd);
 void				ft_setfd_buf(int fd);
 
-char				ft_getchar_int(t_bool move);
-char				ft_getchar(void);
-char				ft_readchar(void);
-t_bool				ft_readtochar(char c);
+t_uint				ft_getchar_int(t_bool move);
+t_uint				ft_getchar(void);
+t_uint				ft_readchar(void);
+t_bool				ft_skiptochar(t_byte c);
+t_bool				ft_readtochar(char **str, t_byte c);
 t_bool				ft_readint(int *target);
 
 char				**ft_strsplit(char const *s, char c);
@@ -105,6 +128,7 @@ int					ft_isdigit(int c);
 int					ft_isempty(int c);
 int					ft_isprint(int c);
 int					ft_isspace(int c);
+int					ft_countchar(char *str, char c);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strcmp_fast(const char *s1, const char *s2, int len);
@@ -125,7 +149,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
-void				*ft_realloc(void *ptr, size_t size);
+void				*ft_realloc(void *ptr, size_t size, size_t newsize);
 void				ft_bzero(void *s, size_t n);
 void				ft_lstadd(t_list **alst, t_list *n);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));

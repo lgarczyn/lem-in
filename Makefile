@@ -10,25 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lgarczyn.filler
-NAME_D = display
+NAME = lem-in
 
-SRC =	parsing.c \
-		checking.c \
-		scoring.c \
-		influence.c \
-		tools.c \
-		distance.c \
-		
+SRC =	lemin.c \
+		parse.c \
+		link.c \
+		check.c \
+		path.c \
+		solve.c \
+		display.c
+
 OBJ = $(SRC:.c=.o)
 
-INC = libft/includes
+INC = -I libft/includes
 
 LIB = -L libft/ -lft
 
-DEB = 
+DEB = -pg
 
-OPT = -Ofast
+OPT = -Ofast -funsigned-char
 
 FLG = -Wall -Wextra -Werror $(OPT) $(DEB)
 
@@ -37,29 +37,24 @@ all: $(NAME)
 libft.a:
 	cd libft && make all
 
-$(NAME):$(OBJ) display.o filler.o libft.a
-	gcc filler.o $(OBJ) $(FLG) $(LIB) -L libft -lft -o $(NAME)
-	gcc display.o $(OBJ) $(FLG) $(LIB) -L libft -lft -o $(NAME_D)
-	cp $(NAME) resources/players
-	cp $(NAME_D) resources
+$(NAME):$(OBJ) libft.a
+	gcc $(OBJ) $(FLG) $(LIB) -o $(NAME)
 	
 %.o: %.c
-	gcc -I$(INC) $(FLG) -c $< $
+	gcc $(INC) $(FLG) -c $< $
 
 clean:
-	rm -rf $(OBJ) display.o filler.o
+	rm -rf $(OBJ)
 	cd libft && make clean
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf $(NAME_D)
 	cd libft && make fclean
 
 re: fclean all
 
-cleannolib:
-	rm -rf $(OBJ) display.o filler.o
+fcleannolib:
+	rm -rf $(OBJ)
 	rm -rf $(NAME)
-	rm -rf $(NAME_D)
 
-smart: cleannolib all
+smart: fcleannolib all

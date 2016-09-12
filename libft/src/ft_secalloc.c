@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getchar.c                                       :+:      :+:    :+:   */
+/*   ft_secalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarczyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/03 17:20:35 by lgarczyn          #+#    #+#             */
-/*   Updated: 2016/09/03 17:20:36 by lgarczyn         ###   ########.fr       */
+/*   Created: 2016/09/12 14:14:02 by lgarczyn          #+#    #+#             */
+/*   Updated: 2016/09/12 14:15:52 by lgarczyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-t_uint		ft_getchar(void)
+void			*ft_secalloc(size_t len)
 {
-	return (ft_getchar_int(false));
+	void		*alloc;
+
+	alloc = ft_memalloc(len);
+	if (!alloc)
+	{
+		ft_perror(NULL);
+		exit(1);
+	}
+	return (alloc);
 }

@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getchar.c                                       :+:      :+:    :+:   */
+/*   ft_dist.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarczyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/03 17:20:35 by lgarczyn          #+#    #+#             */
-/*   Updated: 2016/09/03 17:20:36 by lgarczyn         ###   ########.fr       */
+/*   Created: 2016/09/12 15:01:21 by lgarczyn          #+#    #+#             */
+/*   Updated: 2016/09/12 15:01:24 by lgarczyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "math.h"
 
-t_uint		ft_getchar(void)
+float	ft_dist(t_p a, t_p b)
 {
-	return (ft_getchar_int(false));
+	a.x -= b.x;
+	a.y -= b.y;
+	return (sqrtf(a.x * a.x + a.y * a.y));
 }

@@ -5,22 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgarczyn <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/03 17:20:49 by lgarczyn          #+#    #+#             */
-/*   Updated: 2016/09/03 17:20:50 by lgarczyn         ###   ########.fr       */
+/*   Created: 2016/09/09 15:17:33 by lgarczyn          #+#    #+#             */
+/*   Updated: 2016/09/09 15:17:35 by lgarczyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool			ft_readtochar(char c)
+#include <stdio.h>
+
+t_uint			ft_readtochar(char **dst, t_byte c)
 {
-	while (ft_getchar() != c)
+	char		*str;
+	t_uint		size;
+	t_uint		pos;
+	t_uint		cc;
+
+	size = 64;
+	str = malloc(size);
+	pos = 0;
+	while ((cc = ft_readchar()) != (t_uint)c)
 	{
-		if (ft_getchar() == '\0')
-			return (false);
-		else
-			ft_readchar();
+		if (R_END(cc))
+			break;
+		if (pos >= size)
+		{
+			str = ft_realloc(str, size, size * 2);
+			size *= 2;
+		}
+		str[pos++] = cc;
 	}
-	ft_readchar();
-	return (true);
+	*dst = (char*)malloc(pos + 1);
+	ft_memmove(*dst, str, pos);
+	(*dst)[pos] = '\0';
+	free(str);
+	return (pos);
 }
+
