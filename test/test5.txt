@@ -1,0 +1,35 @@
+-1000
+##start
+A 23 3
+##end
+B 16 7
+#commentaire
+C 16 3
+#
+DAAAAAAAAAAAAAAA 16 5
+E 9 3
+FUCU 1 5
+G 4 8
+Z 9 5
+Z-DAAAAAAAAAAAAAAA
+Z-FUCU
+A-C
+DAAAAAAAAAAAAAAA-C
+E-B
+C-E
+#autre commentaire
+DAAAAAAAAAAAAAAA-B
+G-FUCU
+G-B
+G-DAAAAAAAAAAAAAAA
+FUCU-E
+
+B-A
+#          _______________
+#         /               \
+#  ______[E]----[C]----[A] |
+# /              |     /   |
+#[F]-----[Z]----[D]  /     |
+# \   _________/ | /       |
+#  \ /          [B]/_______/
+#  [G]_________/

@@ -99,8 +99,8 @@ t_uint				ft_getchar_int(t_bool move);
 t_uint				ft_getchar(void);
 t_uint				ft_readchar(void);
 t_bool				ft_skiptochar(t_byte c);
-t_bool				ft_readtochar(char **str, t_byte c);
 t_bool				ft_readint(int *target);
+int					ft_readtochar(char **str, t_byte c);
 
 char				**ft_strsplit(char const *s, char c);
 char				*ft_itoa(int n);

@@ -39,7 +39,7 @@ libft.a:
 
 $(NAME):$(OBJ) libft.a
 	gcc $(OBJ) $(FLG) $(LIB) -o $(NAME)
-	
+
 %.o: %.c
 	gcc $(INC) $(FLG) -c $< $
 

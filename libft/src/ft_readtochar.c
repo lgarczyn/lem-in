@@ -14,7 +14,22 @@
 
 #include <stdio.h>
 
-t_uint			ft_readtochar(char **dst, t_byte c)
+static int		get_return(int pos, t_uint cc, char **dst)
+{
+	if (R_ERROR(cc))
+	{
+		*dst = NULL;
+		return (-1);
+	}
+	if (R_EOF(cc) && pos == 0)
+	{
+		*dst = NULL;
+		return (-1);
+	}
+	return (pos);
+}
+
+int				ft_readtochar(char **dst, t_byte c)
 {
 	char		*str;
 	t_uint		size;
@@ -39,6 +54,6 @@ t_uint			ft_readtochar(char **dst, t_byte c)
 	ft_memmove(*dst, str, pos);
 	(*dst)[pos] = '\0';
 	free(str);
-	return (pos);
+	return (get_return(pos, cc, dst));
 }
 

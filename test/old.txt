@@ -1,0 +1,138 @@
+
+#define ERROR()		ft_putnbr_fd(__LINE__, 2), ft_putchar_fd(' ', 2), ft_putstr_fd(__FILE__, 2), error()
+
+void		display_rooms(t_map *map)
+{
+	int		i;
+	int		j;
+	t_room	*room;
+
+	i = 0;
+	while (i < map->roomcount)
+	{
+		room = get_room(map, i);
+		printf("	room: %s\n", room->name);
+		printf("		id: %i\n", room->id);
+		printf("		pos: %i %i\n", room->pos.x, room->pos.y);
+		printf("		type: %i\n", room->type);
+		printf("		state: %i\n", room->explo.state);
+		printf("		prev:\n");
+		printf("			id: %i\n", room->explo.id);
+		printf("			len: %i\n", room->explo.len);
+		printf("			dist: %f\n", room->explo.dist);
+		printf("		links: %i\n\t\t\t", room->linkcount);
+		j = 0;
+		while (j < room->linkcount)
+		{
+			printf(" %i:%s", room->links[j], get_room(map, room->links[j])->name);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+void		display_paths(t_map *map)
+{
+	int		i;
+	int		j;
+	t_path	*paths;
+
+	paths = map->paths;
+	i = 0;
+	while (paths)
+	{
+		printf("	path: %i\n", i);
+		printf("		wait: %i\n", paths->wait);;
+		printf("		turns: %i\n", paths->len);;
+		printf("		length: %f\n", paths->dist);;
+		printf("		first ant:%i\n", paths->antid);
+		printf("		steps:");
+		j = 0;
+		while (j < paths->len)
+		{
+			printf(" %s", get_room(map, paths->steps[j])->name);
+			j++;
+		}
+		printf("\n");
+		i++;
+		paths = paths->next;
+	}
+}
+
+void		display_map(t_map *map, int pos)
+{
+	t_link	*link;
+
+	printf("---------\n");
+	printf("displaying map %i\n", pos);
+	printf("	antcount %i\n", map->antcount);
+	printf("	roomcount %i\n", map->roomcount);
+	printf("	start %i\n", map->start);
+	printf("	end %i\n", map->end);
+	if (map->links)
+	{
+		printf("	links:\n\t\t");
+		link = map->links;
+		while (link)
+		{
+			printf(" (%i,%i)", link->a, link->b);
+			if ((link->a >= 0 && link->a < map->roomcount) && (link->b >= 0 && link->b < map->roomcount))
+				printf("{%s,%s}", get_room(map, link->a)->name, get_room(map, link->b)->name);
+			else
+				printf("{ERROR}");
+			link = link->next;
+		}
+		printf("\n");
+	}
+	display_rooms(map);
+	display_paths(map);
+	printf("---------\n");
+}
+
+
+void				explore(t_map *map, t_room *room)
+{
+	t_room			*next;
+	t_exploration	exp;
+	int				i;
+
+	printf("%*code %s {\n", room->explo.len * 2, 'n', room->name);
+	i = -1;
+	exp.len = room->explo.len + 1;
+	exp.state = s_explored;
+	exp.id = room->id;
+	while (++i < room->linkcount)
+	{
+		next = &(map->rooms[room->links[i]]);
+		exp.dist = room->explo.dist + ft_dist(room->pos, next->pos);
+		if (next->explo.state == s_burned)
+		{
+			printf("%*cound: %s burned\n", exp.len * 2, 'f', next->name);
+			continue ;
+		}
+		if (next->explo.state == s_explored && next->explo.len < exp.len)
+		{
+			printf("%*cound: %s explored\n", exp.len * 2, 'f', next->name);
+			continue;
+		}
+		if (next->explo.state == s_explored && next->explo.len == exp.len)
+			if (next->explo.dist < exp.dist)
+			{
+				printf("%*cound: %s explored\n", exp.len * 2, 'f', next->name);
+				continue;
+			}
+		if (next->explo.state == s_explored)
+			printf("%*cound: %s explored but replaced\n", exp.len * 2, 'f', next->name);
+		else
+			printf("%*cound: %s not explored\n", exp.len * 2, 'f', next->name);
+		next->explo = exp;
+		if (next->type == t_start)
+			printf("%*cound: %s start with len %i\n", exp.len * 2, 'f', next->name, next->explo.len);
+		if (next->type == t_end)
+			printf("%*cound: %s end\n", exp.len * 2, 'f', next->name);
+		if (next->type == t_none)
+			explore(map, next);
+	}
+	printf("%*c %s\n", room->explo.len * 2, '}', room->name);
+}

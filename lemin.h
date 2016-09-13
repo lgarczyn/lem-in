@@ -13,10 +13,9 @@
 #ifndef _LEMIN_H
 # define _LEMIN_H
 
-#include "libft.h"
+# include "libft.h"
 
-//!!!
-#include <stdio.h>
+#define ERROR()		error()
 
 typedef enum		e_type
 {
@@ -39,8 +38,6 @@ typedef enum		e_error
 	e_parsing = 2,
 	e_allocation = 3,
 }					t_error;
-
-//check the situation where start -> end
 
 typedef struct		s_name
 {
@@ -97,13 +94,15 @@ typedef struct		s_map
 	t_path			*paths;
 }					t_map;
 
-t_room				*get_room();
+void				error(void);
+int					xatoi(char *str);
+
 t_map				get_map();
-t_error				parse(t_map *map);
-t_error				check(t_map *map, t_bool *ignore);
-t_error				apply_links(t_map *map);
-t_error				find_paths(t_map *map);
-t_error				solve(t_map *map);
+void				parse(t_map *map);
+t_bool				check(t_map *map);
+void				apply_links(t_map *map);
+void				find_paths(t_map *map);
+void				solve(t_map *map);
 void				display_instant(t_map *map);
 void				display(t_map *map);
 

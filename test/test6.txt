@@ -1,4 +1,6 @@
+100000
 ##start
+##end
 A 23 3
 B 16 7
 #commentaire
@@ -7,7 +9,6 @@ D 16 5
 E 9 3
 F 1 5
 G 4 8
-##end
 Z 9 5
 Z-D
 Z-F
