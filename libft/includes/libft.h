@@ -13,7 +13,6 @@
 #ifndef _LIBFT_H
 # define _LIBFT_H
 
-# include <string.h>
 # include <errno.h>
 # include <stdlib.h>
 # include <limits.h>
