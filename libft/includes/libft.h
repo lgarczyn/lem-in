@@ -17,6 +17,7 @@
 # include <errno.h>
 # include <stdlib.h>
 # include <limits.h>
+# include "tcolors.h"
 
 # define MIN(a,b)			(((a)<(b))?(a):(b))
 # define MAX(a,b)			(((a)>(b))?(a):(b))
@@ -37,8 +38,6 @@ typedef unsigned int		t_uint;
 # define R_ERROR(x)			(x & READ_ERROR)
 # define R_EOF(x)			(x & READ_EOF)
 # define R_END(x)			(x & (READ_ERROR | READ_EOF))
-
-# include "tcolors.h"
 
 typedef struct		s_list
 {

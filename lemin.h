@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-#define ERROR()		error()
+# define ERROR()	error()
 
 typedef enum		e_type
 {

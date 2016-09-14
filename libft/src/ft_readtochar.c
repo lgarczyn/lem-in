@@ -42,7 +42,7 @@ int				ft_readtochar(char **dst, t_byte c)
 	while ((cc = ft_readchar()) != (t_uint)c)
 	{
 		if (R_END(cc))
-			break;
+			break ;
 		if (pos >= size)
 		{
 			str = ft_realloc(str, size, size * 2);
@@ -56,4 +56,3 @@ int				ft_readtochar(char **dst, t_byte c)
 	free(str);
 	return (get_return(pos, cc, dst));
 }
-

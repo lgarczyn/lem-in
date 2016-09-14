@@ -12,9 +12,9 @@
 
 #include "lemin.h"
 
-void		error(void)
+void			error(void)
 {
-	ft_putstr_fd("ERROR\n", 2);
+	ft_putstr_fd("ERROR\n", 1);
 	exit(1);
 }
 

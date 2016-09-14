@@ -1,4 +1,4 @@
--1000
+100
 ##start
 A 23 3
 ##end
@@ -7,7 +7,7 @@ B 16 7
 C 16 3
 #
 DAAAAAAAAAAAAAAA 16 5
-E 9 3
+1996E 9 3
 FUCU 1 5
 G 4 8
 Z 9 5
@@ -15,21 +15,19 @@ Z-DAAAAAAAAAAAAAAA
 Z-FUCU
 A-C
 DAAAAAAAAAAAAAAA-C
-E-B
-C-E
+1996E-B
+C-1996E
 #autre commentaire
 DAAAAAAAAAAAAAAA-B
 G-FUCU
 G-B
 G-DAAAAAAAAAAAAAAA
-FUCU-E
-
-B-A
+FUCU-1996E
 #          _______________
 #         /               \
 #  ______[E]----[C]----[A] |
-# /              |     /   |
-#[F]-----[Z]----[D]  /     |
-# \   _________/ | /       |
-#  \ /          [B]/_______/
+# /              |         |
+#[F]-----[Z]----[D]        |
+# \   _________/ |         |
+#  \ /          [B]________/
 #  [G]_________/

@@ -90,6 +90,7 @@ void				parse(t_map *map)
 
 	if (ft_readtochar(&str, '\n') <= 0)
 		ERROR();
+	ft_putendl(str);
 	map->antcount = xatoi(str);
 	type = t_none;
 	while ((test = ft_readtochar(&str, '\n')) > 0)

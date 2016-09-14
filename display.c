@@ -52,9 +52,9 @@ void			display_instant(t_map *map)
 {
 	int			i;
 	t_bool		isfirst;
-	char		buffer[1000];
+	char		buffer[10000];
 
-	ft_buf(buffer, 1000, 1);
+	ft_buf(buffer, 10000, 1);
 	i = 1;
 	isfirst = true;
 	while (i <= map->antcount)
@@ -70,9 +70,9 @@ void			display(t_map *map)
 {
 	t_bool		isfirst;
 	int			i;
-	char		buffer[1000];
+	char		buffer[10000];
 
-	ft_buf(buffer, 1000, 1);
+	ft_buf(buffer, 10000, 1);
 	i = 0;
 	while (1)
 	{
