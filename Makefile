@@ -6,7 +6,7 @@
 #    By: lgarczyn <lgarczyn@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/22 17:11:22 by lgarczyn          #+#    #+#              #
-#    Updated: 2015/01/22 17:13:56 by lgarczyn         ###   ########.fr        #
+#    Updated: 2016/09/15 13:03:27 by lgarczyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INC = -I libft/includes
 
 LIB = -L libft/ -lft
 
-DEB = -pg
+DEB =
 
 OPT = -Ofast -funsigned-char
 
