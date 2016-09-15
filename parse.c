@@ -82,6 +82,17 @@ void				parse_link(t_map *map, char *str)
 	map->links = link;
 }
 
+void				display_rest(void)
+{
+	char			*str;
+
+	while (ft_readtochar(&str, '\n') > 0)
+	{
+		ft_putendl(str);
+		free(str);
+	}
+}
+
 void				parse(t_map *map)
 {
 	char			*str;
@@ -106,4 +117,6 @@ void				parse(t_map *map)
 		ft_putendl(str);
 		free(str);
 	}
+	if (test == 0)
+		display_rest();
 }

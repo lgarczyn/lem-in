@@ -25,11 +25,11 @@ void				explore(t_map *map, t_room *room)
 	while (++i < room->linkcount)
 	{
 		next = &(map->rooms[room->links[i]]);
-		exp.dist = room->explo.dist + ft_dist(room->pos, next->pos);
 		if (next->explo.state == s_burned)
 			continue ;
 		if (next->explo.state == s_explored && next->explo.len < exp.len)
 			continue ;
+		exp.dist = room->explo.dist + ft_dist(room->pos, next->pos);
 		if (next->explo.state == s_explored && next->explo.len == exp.len)
 			if (next->explo.dist < exp.dist)
 				continue ;
